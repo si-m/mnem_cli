@@ -1,9 +1,9 @@
 import aesjs  from 'aes-js'
 import crypto from 'crypto'
+import salt   from './salt'
 
- 
-exports.encrypt = (password, salt, message) => {
-	if(!password || !salt){
+exports.encrypt = (password, message) => {
+	if(!password){
 		return "Error salt or password missing"
 	}
 	const _key 	= new Buffer(password)
@@ -22,7 +22,11 @@ exports.encrypt = (password, salt, message) => {
 	
 }
 
-exports.decrypt = (password, salt, encryptedMessage) => {
+exports.decrypt = (password, encryptedMessage) => {
+	const _key 	= new Buffer(password)
+	const _salt = new Buffer(salt)
+	// Key derivation function PBKDF2
+	const derivedKey = crypto.pbkdf2Sync(_key, _salt, 10000, 32, 'sha512')
 	//Converts from Hex to Bytes
 	const encryptedBytes = aesjs.utils.hex.toBytes(encryptedMessage)
 	// decrypt a new instance must be instantiated. 
