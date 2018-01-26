@@ -9,7 +9,7 @@ exports.encrypt = (password, message) => {
 	const _key 	= new Buffer(password)
 	const _salt = new Buffer(salt)
 	// Key derivation function PBKDF2
-	const derivedKey = crypto.pbkdf2Sync(_key, _salt, 10000, 32, 'sha512')
+	const derivedKey = crypto.pbkdf2Sync(_key, _salt, 100000, 32, 'sha512')
 	// text to Bytes
 	const textBytes = aesjs.utils.utf8.toBytes(message)
 	// AES instanced
