@@ -44,7 +44,6 @@ let passPromise = inquirer
 //read file
 let filePromise = readFilePromise(pathValue)
 
-let data = ''
 //wait for promises to complete
 Promise.all([passPromise, filePromise]).then(values =>{
 	saver(cipher[action](values[0].password, values[1]), action, pathValue).then(result => console.log(result))
