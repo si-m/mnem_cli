@@ -16,7 +16,6 @@ exports.encrypt = (password, message) => {
 	const aesCtr = new aesjs.ModeOfOperation.ctr(derivedKey, new aesjs.Counter(5))
 	//encrypt
 	const encryptedBytes = aesCtr.encrypt(textBytes)
-
 	//converts from Bytes to Hex
 	return aesjs.utils.hex.fromBytes(encryptedBytes)
 	
@@ -26,7 +25,7 @@ exports.decrypt = (password, encryptedMessage) => {
 	const _key 	= new Buffer(password)
 	const _salt = new Buffer(salt)
 	// Key derivation function PBKDF2
-	const derivedKey = crypto.pbkdf2Sync(_key, _salt, 10000, 32, 'sha512')
+	const derivedKey = crypto.pbkdf2Sync(_key, _salt, 100000, 32, 'sha512')
 	//Converts from Hex to Bytes
 	const encryptedBytes = aesjs.utils.hex.toBytes(encryptedMessage)
 	// decrypt a new instance must be instantiated. 

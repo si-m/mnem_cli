@@ -5,12 +5,14 @@
   "author": "SiM",
   "license": "MIT",
   "scripts": {
-    "save": "babel-node mnem"
+    "cipher": "babel-node cli"
+  },
+  "bin" :{
+    "mnem": "cli.js"
   },
   "dependencies": {
     "aes-js": "^3.1.0",
     "commander": "^2.13.0",
-    "inquirer": "^5.0.1",
     "inquirer-promise": "^1.0.0",
     "scrypt": "^6.0.3"
   },

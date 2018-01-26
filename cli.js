@@ -7,7 +7,7 @@ import program 									 from 'commander'
 //Mnemonic simple app to encrypt and decrypt txt files.
 program
 	.version('0.1.0')
-	.description('Mnemonic cipher app to encrypt and decrypt text files.')
+	.description('Mnemonic cipher app to encrypt and decrypt text files.\n  Move a txt file into the current directory and use one for the listed commands.')
   .usage('<command> <path>')
   .command('<encrypt> <path>', 'Encrypt a file')
   .command('<decrypt> <path>',	'Decrypt a file')
@@ -49,9 +49,6 @@ let data = ''
 Promise.all([passPromise, filePromise]).then(values =>{
 	saver(cipher[action](values[0].password, values[1]), action, pathValue).then(result => console.log(result))
 }, reason => {
-  console.log(reason)
+  console.log(reason.message)
+  process.exit(1)
 })
-// console.log(encrypt("hola", "este es un mensaje"))
-
-// console.log(decrypt("hola","803842a39f76ece392646321618a357f07d5"))
-
